@@ -1,20 +1,37 @@
 import './App.css';
-import Footer from './Components/Footer';
+import AddCustomer from './Components/AddCustomer';
+import AddEmployee from './Components/AddEmployee';
+import AddExpence from './Components/AddExpence';
+import AddProduct from './Components/AddProduct';
+import AddPurchase from './Components/AddPurchase';
+import AddSale from './Components/AddSale';
+import Dashboard from './Components/Dashboard';
+import Home from './Components/Home';
 import Navbar from './Components/Navbar';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Signup from './Components/Signup';
+import Footer from './Components/Footer';
+
 
 
 function App() {
   return (
     <>
-    <BrowserRouter>
-    <Routes>
-        <Route exact path="/" element={<Navbar/>}></Route>
-    </Routes>
-    <Routes>
-        <Route exact path="/" element={<Footer/>}></Route>
-    </Routes>
-  </BrowserRouter>
+      <BrowserRouter>
+      <Navbar/>
+        <Routes>
+          <Route exact path="/" element={<Home/>}></Route>
+          <Route exact path="/dashboard" element={<Dashboard />}></Route>
+          <Route exact path="/addsale" element={<AddSale/>} />
+          <Route exact path="/addemployee" element={<AddEmployee/>} />
+          <Route exact path="/addcustomer" element={<AddCustomer/>} />
+          <Route exact path="/addpurchase" element={<AddPurchase/>} />
+          <Route exact path="/addexpense" element={<AddExpence/>} />
+          <Route exact path="/addproduct" element={<AddProduct/>} />
+          <Route exact path="/signup" element={<Signup/>} />
+        </Routes>
+        <Footer/>
+      </BrowserRouter>
     </>
   );
 }
