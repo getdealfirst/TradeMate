@@ -30,9 +30,14 @@ public class SaleService {
     }
     public String updateSales(SaleModel newSale,long id){
         saleRepository.findById(id).map(sale->{
-            sale.setRemaining(newSale.getRemaining());
+            sale.setReceivedAmmount(sale.getReceivedAmmount()+newSale.getReceivedAmmount());
+            sale.setRemaining(sale.getRemaining()-newSale.getReceivedAmmount());
             return saleRepository.save(sale);
         }).orElseThrow(()->new UsernameNotFoundException("User not Found "));
         return "Updated";
+    }
+    public String deleteSale(long id){
+        saleRepository.deleteById(id);
+        return  "Deleted";
     }
 }

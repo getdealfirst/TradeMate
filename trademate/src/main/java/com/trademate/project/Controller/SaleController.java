@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(value = {"http://localhost:3000","https://trade-mate-gamma.vercel.app"})
 @RequestMapping("/sales")
 public class SaleController {
     private SaleService saleService;
@@ -34,5 +34,9 @@ public class SaleController {
     @PutMapping("/editsale/{id}")
     public String editSale(@RequestBody SaleModel saleModel,@PathVariable long id){
         return saleService.updateSales(saleModel,id);
+    }
+    @DeleteMapping("/delete/{id}")
+    public  String deleteSale(@PathVariable long id ){
+        return saleService.deleteSale(id);
     }
 }
