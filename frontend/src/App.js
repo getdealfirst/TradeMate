@@ -11,24 +11,27 @@ import Navbar from './Components/Navbar';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from './Components/Signup';
 import Footer from './Components/Footer';
+import SaleDetails from './Components/SaleDetails';
 
 
 
 function App() {
+  let stores = JSON.parse(localStorage.getItem('login'))
   return (
     <>
       <BrowserRouter>
       <Navbar/>
         <Routes>
-          <Route exact path="/" element={<Home/>}></Route>
+          <Route exact path="/" element={stores?<Dashboard/>:<Home/>}></Route>
           <Route exact path="/dashboard" element={<Dashboard />}></Route>
           <Route exact path="/addsale" element={<AddSale/>} />
-          <Route exact path="/addemployee" element={<AddEmployee/>} />
+          <Route exact path="/addemployee" element={<Signup/>} />
           <Route exact path="/addcustomer" element={<AddCustomer/>} />
           <Route exact path="/addpurchase" element={<AddPurchase/>} />
           <Route exact path="/addexpense" element={<AddExpence/>} />
           <Route exact path="/addproduct" element={<AddProduct/>} />
           <Route exact path="/signup" element={<Signup/>} />
+          <Route exact path="/saledetails" element={<SaleDetails/>} />
         </Routes>
         <Footer/>
       </BrowserRouter>
