@@ -13,7 +13,8 @@ function SaleDetails() {
             'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
           }
     });
-    setSaleDetails(saleDetail.data.reverse())
+      const reversedData = saleDetail.data.reverse()
+      setSaleDetails(reversedData)
     // console.log(saleDetail.data.reverse())
   } 
   const deleteOnClick=async (id,e)=>{
