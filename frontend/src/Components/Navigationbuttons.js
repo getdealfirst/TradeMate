@@ -11,7 +11,7 @@ function Navigationbuttons() {
                             <NavLink className='m-2 p-2 border border-gray-100 flex justify-center hover:border-gray-300 hover:font-semibold hover:bg-gray-100'>Profit/loss</NavLink>
                         </div>
                         <div>
-                            <NavLink className='m-2 p-2 border border-gray-100 flex justify-center hover:border-gray-300 hover:font-semibold hover:bg-gray-100'>Sales Details</NavLink>
+                            <NavLink className='m-2 p-2 border border-gray-100 flex justify-center hover:border-gray-300 hover:font-semibold hover:bg-gray-100' to="/saledetails">Sales Details</NavLink>
                             <NavLink className='m-2 p-2 border border-gray-100 flex justify-center hover:border-gray-300 hover:font-semibold hover:bg-gray-100'>Purchage Details</NavLink>
                             <NavLink className='m-2 p-2 border border-gray-100 flex justify-center hover:border-gray-300 hover:font-semibold hover:bg-gray-100'>Expences</NavLink>
                             <NavLink className='m-2 p-2 border border-gray-100 flex justify-center hover:border-gray-300 hover:font-semibold hover:bg-gray-100'>Profit/loss</NavLink>

@@ -2,10 +2,13 @@ import React from 'react'
 import Navigationbuttons from './Navigationbuttons'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
+import Home from './Home'
 
 function Dashboard() {
+    let store = JSON.parse(localStorage.getItem('login'))
     return (
-        <div>
+        <>
+        {store?<div>
             <div><h1 className='flex justify-center text-3xl text-gray-800'>Welcome to TradeMate</h1></div>
             <div className='gridstyle grid grid-cols-4'>
 
@@ -18,7 +21,8 @@ function Dashboard() {
                     <RightSidebar />
                 </div>
             </div>
-        </div>
+        </div>:<Home/>}
+        </>
     )
 }
 

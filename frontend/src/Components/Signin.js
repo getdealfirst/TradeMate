@@ -1,34 +1,85 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+// import { NavLink } from 'react-router-dom'
 
 function Signin() {
-  return (
+ 
+  const navigate = useNavigate();
+  const [loginDetails,setLoginDetails] =useState({
+    email:'',
+    password:'',
+    login:false,
+    store:null
+  })
+  useEffect(()=>{
+    let store = JSON.parse(localStorage.getItem('login'))
+    setLoginDetails({store:store})
+    if(store && store.login){
+      setLoginDetails({login:true})
+    }
+
+  },[])
+  const onEventChange= ((e)=> {
+setLoginDetails(
+  {...loginDetails,
+  [e.target.name]:e.target.value}
+)
+  })
+  const handleOnClick=((e)=>{
+    e.preventDefault();
+    fetch('http://localhost:8080/auth/login',{
+      method:"POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(loginDetails)
+    }).then((resp)=>{
+      console.log(resp)
+      resp.json().then((result)=>{
+        
+        localStorage.setItem('login',JSON.stringify({
+          login:true,
+          token:result.jwtToken,
+          user:result.userNAme
+        }))
+        
+      })
+      if(resp.ok){
+        navigate('/Dashboard')
+        window.location.reload();
+       }
+    })
+   
+  })
+
+ return (
     <div>
-       <form class="space-y-6" action="#" method="POST">
+       <form className="space-y-6" onSubmit={(e)=>handleOnClick(e)}>
       <div>
-        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
-        <div class="mt-2">
-          <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+        <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+        <div className="mt-2 ">
+          <input id="email" name="email" value={loginDetails.email} onChange={(e) => onEventChange(e)}  type="email" autoComplete="email" required className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
         </div>
       </div>
 
       <div>
-        <div class="flex items-center justify-between">
-          <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-          <div class="text-sm">
-            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500 underline underline-offset-4">Forgot password?</a>
+        <div className="flex items-center justify-between">
+          <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password</label>
+         
+        </div>
+        <div className="mt-2">
+          <input id="password" value={loginDetails.password} name="password"  onChange={(e) => onEventChange(e)} type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+          <div className="text-sm">
+            <a href="/" className="font-semibold text-indigo-600 hover:text-indigo-500 underline underline-offset-4">Forgot password?</a>
           </div>
         </div>
-        <div class="mt-2">
-          <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-        </div>
       </div>
 
       <div>
-        <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+        <button   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
       </div>
-      <div class="text-sm flex justify-end">
-            <p className='mx-2'>Dont's have account </p><a href="/signup" class="font-semibold text-indigo-600 hover:text-indigo-500 underline underline-offset-4">Sign up</a>
+      <div className="text-sm flex justify-end">
+            <p className='mx-2'>Dont's have account </p><a href="/signup" className="font-semibold text-indigo-600 hover:text-indigo-500 underline underline-offset-4">Sign up</a>
           </div>
     </form>
     </div>
