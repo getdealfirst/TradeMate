@@ -12,6 +12,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from './Components/Signup';
 import Footer from './Components/Footer';
 import SaleDetails from './Components/SaleDetails';
+import UpdateSale from './Components/UpdateSale';
 
 
 
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/addproduct" element={<AddProduct/>} />
           <Route exact path="/signup" element={<Signup/>} />
           <Route exact path="/saledetails" element={<SaleDetails/>} />
+          <Route exact path="/updatesale/:id" element={<UpdateSale/>} />
         </Routes>
         <Footer/>
       </BrowserRouter>
