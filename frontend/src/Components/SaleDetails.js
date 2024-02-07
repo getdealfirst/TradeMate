@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom';
 
 function SaleDetails() {
     const [saleDetails,setSaleDetails] = useState([])
@@ -15,6 +16,25 @@ function SaleDetails() {
     setSaleDetails(saleDetail.data.reverse())
     // console.log(saleDetail.data.reverse())
   } 
+  const deleteOnClick=async (id,e)=>{
+    e.preventDefault()
+    const confirm = window.confirm("Are you Sure to Delete")
+    console.log(confirm)
+    if(confirm){
+        await axios.delete(`http://localhost:8080/sales/delete/${id}`,{
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
+              }
+        }).then((resp)=>{
+            if(resp.ok){
+                window.location.reload();
+            }else{
+                console.log("Something Went Wrong")
+            }
+        })
+    }
+console.log("Dlete Clicked:-",id)
+  }
   return (
     <div className=' px-10'>
      
@@ -51,30 +71,30 @@ function SaleDetails() {
         {saleDetails.reverse().map((saleDetail,index)=>(
             <tbody key = {saleDetail.id} className='border border-x-2 my-10'>
             <tr className="border-b border-gray-200 dark:border-gray-700">
-                <th scope="row" className={` px-6 py-2 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
+                <th scope="row" className={` px-6 py-4 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
                    {saleDetail.customerName}
                 </th>
-                <td className={` px-6 py-2 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
+                <td className={` px-6 py-4 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
                     {saleDetail.productName}
                 </td>
-                <td className={` px-6 py-2 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
+                <td className={` px-6 py-4 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
                     {saleDetail.quantity}
                 </td>
-                <td className={` px-6 py-2 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center `}>
+                <td className={` px-6 py-4 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center `}>
                     {saleDetail.totalAmmount}
                 </td>
-                <td className={` px-6 py-2 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
+                <td className={` px-6 py-4 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
                    {saleDetail.receivedAmmount}
                 </td>
-                <td className={` px-6 py-2 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
+                <td className={` px-6 py-4 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
                     {saleDetail.date}
                 </td>
-                <td className={` px-6 py-2 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
+                <td className={` px-6 py-4 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
                     {saleDetail.remaining}
                 </td>
-                <td className={` px-6 py-2 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
-                    <button className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all'>Edit</button>
-                    <button className='border border-x-2 py-2 px-4 rounded-xl m-1 bg-red-300 hover:bg-green-600 hover:text-white transition-all'>Delete</button>
+                <td className={` px-6 py-4 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
+                    <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`/updatesale/${saleDetail.id}`}>Received</NavLink>
+                    <NavLink onClick={(e)=>deleteOnClick(saleDetail.id,e)} className='border border-x-2 py-2 px-4 rounded-xl m-1 bg-red-300 hover:bg-green-600 hover:text-white transition-all'>Delete</NavLink>
                 </td>
             </tr>
             

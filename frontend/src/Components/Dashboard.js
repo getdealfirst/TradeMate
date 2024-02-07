@@ -9,7 +9,7 @@ function Dashboard() {
     return (
         <>
         {store?<div>
-            <div><h1 className='flex justify-center text-3xl text-gray-800'>Welcome to TradeMate</h1></div>
+            <div><h1 className='flex justify-center text-3xl text-gray-800 font-semibold'>Welcome to Trade<span className='text-red-600'>Mate</span></h1></div>
             <div className='gridstyle grid grid-cols-4'>
 
                 <LeftSidbar opendash="bold"/>
