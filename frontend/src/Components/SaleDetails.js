@@ -34,7 +34,7 @@ function SaleDetails() {
             }
         })
     }
-console.log("Dlete Clicked:-",id)
+console.log("Delete Clicked:-",id)
   }
   return (
     <div className=' px-10'>

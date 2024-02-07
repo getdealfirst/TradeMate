@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(value = {"http://localhost:3000","https://trade-mate-gamma.vercel.app"})
 @RequestMapping("/user")
 public class UserController {
     private UserService userService;
