@@ -22,7 +22,7 @@ function UpdateSale() {
         method:"PUT",
         headers: {
             'Content-Type': 'application/json',
-            'Authorization':`Bearer ${JSON.parse(localStorage.getItem('login')).token}`
+            'Authorization':`Bearer ${localStorage.getItem('login')?JSON.parse(localStorage.getItem('login')).token:""}`
           },
           body:JSON.stringify(saleDetail)
     }).then((resp)=>{
@@ -40,7 +40,7 @@ navigate('/saledetails')
                     <form className="space-y-6 px-40 py-2" onSubmit={(e)=>handleOnSubmit(e)}>
                         <div>
                             <div className="flex items-center justify-between">
-                                <label for="password" className="block text-sm font-medium leading-6 text-gray-900">Received Ammount</label>
+                                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Received Ammount</label>
                             </div>
                             <div className="mt-2">
                                 <input value={saleDetail.receivedAmmount} onChange={(e) => onEventChange(e)} id="amount" name="receivedAmmount" type="number" required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
