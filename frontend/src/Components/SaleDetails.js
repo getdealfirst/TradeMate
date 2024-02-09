@@ -13,7 +13,9 @@ function SaleDetails() {
             'Authorization': `Bearer ${localStorage.getItem('login')?JSON.parse(localStorage.getItem('login')).token:""}`
           }
     });
+
     setSaleDetails(saleDetail.data.reverse())
+
   } 
   const deleteOnClick=async (id,e)=>{
     e.preventDefault()
