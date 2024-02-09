@@ -25,5 +25,8 @@ public class UserController {
     public List<UserModel> getAllUsers(){
         return userService.getUsers();
     }
-
+@PostMapping("/byemail")
+    public UserModel getByEmail(@RequestBody UserModel user){
+        return userService.getByEmail(user.getEmail());
+}
 }

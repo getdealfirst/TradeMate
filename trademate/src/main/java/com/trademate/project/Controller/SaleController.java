@@ -21,6 +21,7 @@ public class SaleController {
 
     @PostMapping("/addSale")
     public ResponseEntity<SaleModel> addSale(@RequestBody SaleModel saleModel){
+        System.out.println("intem Name:- "+saleModel.getItem().getItemName());
         return  new ResponseEntity<SaleModel>(saleService.addSale(saleModel), HttpStatus.CREATED);
     }
     @GetMapping("/allsaledetails")

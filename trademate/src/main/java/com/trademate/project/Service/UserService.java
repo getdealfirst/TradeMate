@@ -23,4 +23,7 @@ public class UserService {
 //        System.out.println(userModel.getPassword());
         return userRepository.save(userModel);
     }
+    public UserModel getByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
 }
