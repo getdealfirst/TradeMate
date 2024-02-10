@@ -74,7 +74,7 @@ function SaleDetails() {
                    {saleDetail.customerName}
                 </th>
                 <td className={` px-6 py-4 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
-                    {saleDetail.productName}
+                    {saleDetail.item.itemName}
                 </td>
                 <td className={` px-6 py-4 font-medium ${saleDetail.remaining>0?'text-white':'text-green-600'} ${saleDetail.remaining>0?'bg-red-600':'bg-white'} align-center`}>
                     {saleDetail.quantity}

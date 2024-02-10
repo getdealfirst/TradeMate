@@ -16,6 +16,7 @@ public class StockItemService {
     private StockItemRepository stockItemRepository;
 
     public ResponseEntity<StockItemModel> addStock(StockItemModel item){
+        item.getUser().setId(item.getUsersId());
         return new ResponseEntity<StockItemModel>(stockItemRepository.save(item), HttpStatus.CREATED);
     }
     public List<StockItemModel> getAll(){
@@ -23,5 +24,11 @@ public class StockItemService {
     }
     public StockItemModel getByName(StockItemModel item){
         return stockItemRepository.findByItemName(item.getItemName());
+    }
+    public String updateItem(int price,String itemName ){
+        StockItemModel existingItem = stockItemRepository.findByItemName(itemName);
+        existingItem.setPurchasePrice(price);
+        stockItemRepository.save(existingItem);
+        return "Updated";
     }
 }

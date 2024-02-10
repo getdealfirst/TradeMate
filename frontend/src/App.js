@@ -14,6 +14,9 @@ import Footer from './Components/Footer';
 import SaleDetails from './Components/SaleDetails';
 import UpdateSale from './Components/UpdateSale';
 import Test from './Components/Test';
+import Profits from './Components/Profits';
+import ProductLists from './Components/ProductLists';
+import UpdateProduct from './Components/UpdateProduct';
 
 
 
@@ -35,8 +38,10 @@ function App() {
           <Route exact path="/signup" element={<Signup/>} />
           <Route exact path="/saledetails" element={<SaleDetails/>} />
           <Route exact path="/updatesale/:id" element={<UpdateSale/>} />
+          <Route exact path="/profits" element={<Profits/>} />
+          <Route exact path="/stocks" element={<ProductLists/>} />
           
-          <Route exact path="/test" element={<Test/>} />
+          <Route exact path="/updateproduct/:id" element={<UpdateProduct/>} />
         </Routes>
         <Footer/>
       </BrowserRouter>

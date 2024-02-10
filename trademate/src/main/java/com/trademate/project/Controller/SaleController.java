@@ -21,7 +21,10 @@ public class SaleController {
 
     @PostMapping("/addSale")
     public ResponseEntity<SaleModel> addSale(@RequestBody SaleModel saleModel){
-        System.out.println("intem Name:- "+saleModel.getItem().getItemName());
+        saleModel.getItem().setItemName(saleModel.getItemName());
+        saleModel.getUser().setId(saleModel.getSaleUserId());
+        System.out.println("UID :-"+saleModel.getSaleUserId());
+        System.out.println("intem Name"+saleModel.getItem().getItemName()+","+saleModel.getUser().getId());
         return  new ResponseEntity<SaleModel>(saleService.addSale(saleModel), HttpStatus.CREATED);
     }
     @GetMapping("/allsaledetails")
