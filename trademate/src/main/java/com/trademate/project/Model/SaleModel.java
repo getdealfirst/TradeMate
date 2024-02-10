@@ -28,6 +28,8 @@ public class SaleModel {
     private int totalAmmount;
     private int remaining;
     private int profit;
+    private String itemName;
+    private long saleUserId;
     @ManyToOne
     private UserModel user;
 

@@ -45,26 +45,24 @@ function AddSale() {
         item: {
             itemName: ''
         },
+        itemName: '',
         quantity: 0,
         date: null,
         customerName: "",
         rate: 0,
         receivedAmmount: 0,
-        user: {
+        saleUserId: 0,
+        user:{
             id:0
         }
+
     })
     const onEventChange = (e) => {
-        const {name, value} = e.target
+        const { name, value } = e.target
         setSaleDetail(prevSale => ({
             ...prevSale,
-            [name==="itemName"?'':name]:name==="itemName"?'':value,
-            item:{
-            [name==="itemName"?name:'']: name==="itemName"?value:'' 
-            },
-            user:{
-                id:id
-            }
+            [name]: value,
+            saleUserId: id
         }));
 
     }
@@ -80,16 +78,21 @@ function AddSale() {
         }).then((resp) => {
             if (resp.ok) {
                 setSaleDetail({
-                    item: {
-                        itemName: ''
+                    item:{
+                        itemName:""
                     },
+                    itemName: '',
                     quantity: 0,
                     date: 0,
                     customerName: "",
                     rate: 0,
                     receivedAmmount: 0,
+                    user:{
+                        id:0
+                    }
                 })
                 upStatus();
+                // window.location.reload()
             } else {
                 failStatus();
             }
@@ -118,6 +121,10 @@ function AddSale() {
                             <div className="mt-2">
                                 <input value={saleDetail.date} onChange={(e) => onEventChange(e)} id="date" name="date" type="date" className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
+                        </div>
+                        <div>
+                            <label htmlFor="Item Name" className="block text-sm font-medium leading-6 text-gray-900">Enter Product name</label>
+                            <input value={saleDetail.itemName} onChange={(e) => onEventChange(e)} id="itemName" list='itemList' name="itemName" type="text" required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
                         <div>
                             <div className="flex items-center justify-between">
@@ -149,10 +156,7 @@ function AddSale() {
                                 <input value={saleDetail.receivedAmmount} onChange={(e) => onEventChange(e)} id="amount" name="receivedAmmount" type="number" min='0' required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
-                        <div>
-                            <label htmlFor="Item Name" className="block text-sm font-medium leading-6 text-gray-900">Enter Product name</label>
-                            <input value={saleDetail.item.itemName} onChange={(e) => onEventChange(e)} id="itemName" list='itemList' name="itemName" type="text" required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                        </div>
+                      
                         <div>
                             <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Sale</button>
                         </div>

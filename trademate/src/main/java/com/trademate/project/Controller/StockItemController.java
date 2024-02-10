@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/stock")
+@CrossOrigin(value = {"http://localhost:3000","https://trade-mate-gamma.vercel.app"})
 public class StockItemController {
     @Autowired
     private StockItemService service;
@@ -21,5 +22,9 @@ public class StockItemController {
     @GetMapping("/all")
     public List<StockItemModel> getAll(){
         return service.getAll();
+    }
+    @PutMapping("/updateStock")
+    public String updateStock(@RequestBody StockItemModel item){
+            return service.updateItem(item.getPurchasePrice(),item.getItemName());
     }
 }
