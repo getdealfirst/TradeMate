@@ -3,12 +3,28 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 
 function SaleDetails() {
-    const [saleDetails, setSaleDetails] = useState([])
-    useEffect(() => {
-        loadUser();
-    }, [])
-    const loadUser = async () => {
-        const saleDetail = await axios.get("http://localhost:8080/sales/allsaledetails", {
+
+    const [saleDetails,setSaleDetails] = useState([])
+    useEffect(()=>{
+     loadUser();
+    },[])
+  const loadUser =async ()=>{
+    const saleDetail= await axios.get("http://localhost:8080/sales/allsaledetails",{
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('login')?JSON.parse(localStorage.getItem('login')).token:""}`
+          }
+    });
+
+    setSaleDetails(saleDetail.data.reverse())
+
+  } 
+  const deleteOnClick=async (id,e)=>{
+    e.preventDefault()
+    const confirm = window.confirm("Are you Sure to Delete")
+    
+    if(confirm){
+        await axios.delete(`http://localhost:8080/sales/delete/${id}`,{
+
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
             }
