@@ -42,6 +42,7 @@ function App() {
           <Route exact path="/stocks" element={<ProductLists/>} />
           
           <Route exact path="/updateproduct/:id" element={<UpdateProduct/>} />
+          <Route exact path="/test" element={<Test/>} />
         </Routes>
         <Footer/>
       </BrowserRouter>

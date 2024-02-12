@@ -24,7 +24,6 @@ public class SaleService {
         saleModel.setTotalAmmount(saleModel.getQuantity()*saleModel.getRate());
         saleModel.setRemaining(saleModel.getTotalAmmount()-saleModel.getReceivedAmmount());
         int pr = saleModel.getTotalAmmount()-saleModel.getQuantity()*(stockItemService.getByName(saleModel.getItem()).getPurchasePrice());
-        System.out.println("profit :-"+pr);
         saleModel.setProfit(pr);
         return saleRepository.save(saleModel);
     }
@@ -45,5 +44,17 @@ public class SaleService {
     public String deleteSale(long id){
         saleRepository.deleteById(id);
         return  "Deleted";
+    }
+    public Object sumOfProfits(int month,int year){
+        return saleRepository.sumOfRemainingByMonth(month,year);
+    }
+    public List<SaleModel> getByCustomerName(String customerName){
+        return saleRepository.findByCustomerName(customerName);
+    }
+    public int getRemainingByCustomer(String customerName){
+        return saleRepository.sumOfTotalRemainingByCustomer(customerName);
+    }
+    public List<SaleModel> salesWithRemainingBalance(){
+        return saleRepository.salesWithRemainingBalance();
     }
 }
