@@ -20,7 +20,6 @@ public class UserService {
     }
     public UserModel addUser(UserModel userModel){
         userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
-//        System.out.println(userModel.getPassword());
         return userRepository.save(userModel);
     }
     public UserModel getByEmail(String email){

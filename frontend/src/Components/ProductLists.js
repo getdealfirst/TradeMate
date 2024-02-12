@@ -19,17 +19,18 @@ function ProductLists() {
     }
 
     return (
-        <div className=' px-10'>
-<div className='gridstyle grid grid-cols-4'>
+        <div className=' px-10 '>
+            <h1 className='flex justify-center m-6 text-green-600 text-3xl font-semibold'>Added Products List</h1>
+<div className='gridstyle grid grid-cols-5'>
 <LeftSidbar />
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg col-span-2">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg col-span-3">
+                <table className="text-sm">
+                    <thead className="text-xs text-gray-700 uppercase">
                         <tr>
                             <th scope="col" className="px-6 py-3 text-white bg-gray-400 ">
                                 Sn. No.
                             </th>
-                            <th scope="col" className="px-6 py-3 text-white bg-gray-400">
+                            <th scope="col" className="px-6  py-3 text-white bg-gray-400">
                                 Item Name
                             </th>
                             <th scope="col" className="px-6 py-3 text-white bg-gray-400">
@@ -39,29 +40,29 @@ function ProductLists() {
                                 Category
                             </th>
 
-                            <th scope="col" className="px-6 py-3 text-white bg-gray-400 flex justify-center">
+                            <th scope="col" className="px-6 py-3  text-white bg-gray-400 ">
                                 Actions
                             </th>
                         </tr>
                     </thead>
                     {productDetailss.reverse().map((productDetails, index) => (
                         <tbody key={index + 1} className='border border-x-2 my-10'>
-                            <tr className="border-b border-gray-200 dark:border-gray-700">
-                                <th scope="row" className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white align-center">
+                            <tr className="border border-gray-200 align-middle">
+                                <td scope="row" className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
                                     {index + 1}
-                                </th>
-                                <th scope="row" className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white align-center">
-                                    {productDetails.itemName}
-                                </th>
-                                <td className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white align-center">
+                                </td>
+                                <td scope="row" className="border w-80 text-wrap border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
+                                    {productDetails.itemName.length>30?productDetails.itemName.slice(0,27)+"...":productDetails.itemName}
+                                </td>
+                                <td className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
                                     {productDetails.purchasePrice}
                                 </td>
-                                <td className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white align-center">
+                                <td className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
                                     {productDetails.category}
                                 </td>
 
-                                <td className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white align-center flex justify-center items-center">
-                                    <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`/updateproduct/${productDetails.itemName}`}>Update Price</NavLink>
+                                <td className="border border-x-2 font-medium text-green-600 bg-white  flex justify-center items-center ">
+                                    <NavLink className='border border-x-2 py-2 px-2 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`/updateproduct/${productDetails.itemName}`}>Update Price</NavLink>
                                 </td>
                             </tr>
 

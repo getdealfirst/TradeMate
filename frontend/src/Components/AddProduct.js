@@ -21,7 +21,7 @@ function AddProduct() {
         usersId: id
     })
     const upStatus = () => {
-        setUploadStatus("Sale Added")
+        setUploadStatus("Item Added ")
         setTimeout(() => {
             setUploadStatus("")
         }, 3000);
@@ -75,7 +75,7 @@ function AddProduct() {
     };
 
     const loadUser = () => {
-        fetch('http://localhost:8080/user/byemail', {
+        fetch(`http://localhost:8080/user/byemail`, {
             "method": "POST",
             headers: {
                 'Content-Type': 'application/json',
